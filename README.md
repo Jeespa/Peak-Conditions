@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# Peak Conditions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Kjøring av appen
 
-Currently, two official plugins are available:
+For å kjøre appen må en skrive 'npm install' og deretter 'npm run dev'.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Beskrivelse av appen
 
-## Expanding the ESLint configuration
+Peak Conditions skal gi brukerne en bedre måte å sjekke været på. Når en først går inn på siden, ser en destinasjoner og været på det laveste punktet til skistedet. Når en trykker på "detaljer", får en været akkurat nå på tre punkter og et langtidsvarsel for det laveste punktet. Hvis en trykker på en av de to andre punktene, vil langtidsvarselet gjelde for det punktet.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Valg vi har tatt
 
-- Configure the top-level `parserOptions` property like this:
+Vi har antatt at en kan presentere ett kort om gangen i et rutenett (en form for liste), der scrolling gir muligheten til å bla seg frem eller tilbake. en hopper til en spesifikk ressurs ved å trykke på "detaljer" under kortet.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+Vi har et filter der en kan sortere skistedene etter navn. en kan også velge å bare vise favoritter. Favoritter huskes når en lukker nettleseren din og åpner den igjen. Hvis en refresher siden, vil den huske om en filtrerer alfabetisk eller reversert alfabetisk, men hvis en laster inn siden på nytt, vil den filtrere alfabetisk.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Man kan trykke på stjernen på et destinasjonskort for å legge den til som favoritt. Dette valget huskes når en starter nettleseren på nytt.
+
+Siden er responsiv, slik at appen kan brukes på både store skjermer og mindre smarttelefoner.
+
+Et godt eksempel på ryddig utforming er langtidsvarselet for et skisted. Hvis en bruker mobil, endres presentasjonen av tabellen drastisk for å opprettholde en ryddig utforming.
+
+## Tekniske prestasjon
+
+Peak Conditions vil aldri sende flere forespørsler til Meteorologisk institutts API enn nødvendig. Appen sjekker når Meteorologisk institutt skal oppdatere værvarslingen for en destinasjon og holder dataen fersk helt frem til da.
+
+## Hva som er testet
+
+Siden dekningsgraden ikke var fokus for P1, har vi bare testet en komponent. 'DestinationCardComponent' har to vanlige komponenttester og en snapshot-test. Dataen er mocket slik at ingen API-kall blir gjort. For å kjøre testene, bruk 'npm test'.
